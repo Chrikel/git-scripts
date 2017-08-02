@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then 
+    echo "No branch name provided"
+    exit 1
+fi
+
+BASEBRANCH="develop"
+if [ -n $2 ]
+then
+    BASEBRANCH=$2
+fi
+
+BRANCHNAME=$1
+
+git stash 
+git checkout "$BASEBRANCH"
+git pull --rebase
+git checkout -b "feature/$BRANCHNAME"
+git stash pop
+git add .
+git commit 
+git push origin "fearure/$BRANCHNAME"
+git checkout "$BASEBRANCH"
+
