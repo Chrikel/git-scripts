@@ -21,6 +21,6 @@ git checkout -b feature/$BRANCHNAME
 git stash pop 
 git add . 
 git commit 
-git push origin fearure/$BRANCHNAME 
+git push origin feature/$BRANCHNAME 
 git checkout $BASEBRANCH 
 echo "All done"
