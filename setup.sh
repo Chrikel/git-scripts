@@ -2,30 +2,22 @@
 
 CURRENTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPTDIR="$CURRENTDIR/scripts/"
-SHELLCONFIG=""
+BASHCONFIG="$HOME/.profile"
+ZSHCONFIG="$HOME/.zprofile"
 
-if [ -r ~/.bashrc ] 
-then 
-    SHELLCONFIG="~/.bashrc"
-fi
-
-if [ -r ~/.zshrc ]
-then
-    SHELLCONFIG="~/.zshrc"
-fi
-
-if [[ $SCRIPTDIR != *"$PATH"*  ]]
-then 
-   if [ -z $SHELLCONFIG ]
-   then
-        echo "No shellconfig file found"
-        echo "Add line to your shell config"
-        echo "export PATH=\$PATH:$SCRIPTDIR"
-    else
-        echo "export PATH=\$PATH:$SCRIPTDIR" >> $SHELLCONFIG
-        . $SHELLCONFIG
-    fi    
+if ! grep -q "$SCRIPTDIR" "$BASHCONFIG" 2>1 /dev/null; then
+    echo "export PATH=\$PATH:$SCRIPTDIR" >> $BASHCONFIG  
+    echo "Installed in BASH"
 else
-    echo "Already installed"
+    echo "Already in BASH installed"
 fi
+
+if ! grep -q "$SCRIPTDIR" "$ZSHCONFIG" 2>1 /dev/null; then
+    echo "export PATH=\$PATH:$SCRIPTDIR" >> $ZSHCONFIG
+    echo "Installed in ZSH"
+else
+    echo "Already in ZSH installed"
+fi
+
+
 
