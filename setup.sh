@@ -26,6 +26,6 @@ then
         . $SHELLCONFIG
     fi    
 else
-    echo "Setup already done"
+    echo "Already installed"
 fi
 
