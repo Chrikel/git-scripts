@@ -15,12 +15,12 @@ fi
 BRANCHNAME=$1
 
 git stash 
-git checkout "$BASEBRANCH"
-git pull --rebase
-git checkout -b "feature/$BRANCHNAME"
-git stash pop
-git add .
-git commit 
-git push origin "fearure/$BRANCHNAME"
-git checkout "$BASEBRANCH"
+git checkout "$BASEBRANCH" || echo "Somthing went wrong" && exit 1
+git pull --rebase || echo "Somthing went wrong" && exit 1
+git checkout -b "feature/$BRANCHNAME" || echo "Somthing went wrong" && exit 1
+git stash pop || echo "Somthing went wrong" && exit 1
+git add . || echo "Somthing went wrong" && exit 1
+git commit || echo "Somthing went wrong" && exit 1
+git push origin "fearure/$BRANCHNAME" || echo "Somthing went wrong" && exit 1
+git checkout "$BASEBRANCH" || echo "Somthing went wrong" && exit 1
 
